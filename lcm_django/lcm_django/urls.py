@@ -19,5 +19,5 @@ from django.urls import path
 from k8s_info import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('nodes', views.nodes, name='nodes'),
 ]

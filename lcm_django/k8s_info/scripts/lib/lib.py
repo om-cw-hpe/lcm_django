@@ -1,10 +1,10 @@
 def list_all_pod(con):
     print("Listing pods with their IPs:")
     ret = con.list_pod_for_all_namespaces(watch=False)
-    return ret
-    '''for i in ret.items:
-        print("%s\t%s\t%s" % (i.status.pod_ip, i.metadata.namespace, i.metadata.name))
-        '''
+    data =[]
+    for i in ret.items:
+        data.append({'pod_ip':i.status.pod_ip, 'pod_namespace':i.metadata.namespace, 'pod_name': i.metadata.name})
+    return data        
 
 
 def list_pod_in_ns(con, ns):

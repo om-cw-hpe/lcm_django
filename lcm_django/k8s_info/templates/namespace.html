@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}namespace {% endblock %}
+{% block title %}namespace{% endblock %}
 
 {% block content %}
 
 {% for item in data %}
-    <p>{{ item.namespace}}:  {{ item.pod_name}}</p> 
+    <p>Node_Name:{{ item.Node_Name}}             Node_IP:{{ item.Node_IP }}</p> 
 
 {% endfor %}
 {% endblock %}

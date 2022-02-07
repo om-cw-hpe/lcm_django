@@ -19,17 +19,29 @@ def read_pods_in_ns(con, ns, name):
     ret = con.read_namespaced_deployment(name, ns, pretty='pretty')
     for i in ret.spec.template.spec.containers:
         print(i.image + "\n")
+
+def get_nodes(con = v1):
+    ret = con.list_node()
+    data = []
+    for i in ret.items:
+        data.append({'Node_Name': i.metadata.name, 'Node_IP': i.status.addresses[0].address})
+    return data
+#'Node_Role': str(i.metadata.labels['node-role.kubernetes.io/master'], 'Node_IP': i.metadata.labels['k3s.io/internal-ip'])
+
 def main():
-    con = v1
+    '''con = v1
     ns = "default"
     def list_ns(con):
         data =[]
         ret = lib.list_all_pod(con)
         for i in ret.items:
-            data.append({'namespace': str(i.metadata.namespace), 'pod_name': str(i.metadata.name)})
+            data.append({'namespace': str(i.metadata.namespace), 'pod_name': str(i.metadata.name), 'pod_ip': str(i.status.pod_ip)})
         return data
-    return list_ns(v1) 
+    return list_ns(v1)'''
+     
+    get_nodes(v1)
     '''lib.list_all_pod(v1)
+
     for ns in (lib.list_all_namespaces(v1)):
         list_namespaced_deployment(v2, ns)
     res = lib.get_node(v1)
